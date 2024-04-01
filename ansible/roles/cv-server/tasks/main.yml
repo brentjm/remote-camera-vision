@@ -1,0 +1,15 @@
+---
+- name: Include tasks in check-os.yml
+  ansible.builtin.include_tasks:
+    file: check-os.yml
+
+- name: Install tasks in install-docker.yml
+  ansible.builtin.include_tasks:
+    file: install-docker.yml
+
+- name: Install the application
+  ansible.builtin.include_tasks:
+    file: install-app.yml
+
+- name: Kill all user sessions
+  ansible.builtin.meta: reset_connection

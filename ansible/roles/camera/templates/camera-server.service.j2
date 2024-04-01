@@ -1,0 +1,15 @@
+[Unit]
+Description=Camera server for districuted computer vision
+After=syslog.target
+
+[Service]
+Type=simple
+User=vagrant
+Group=vagrant
+WorkingDirectory=/opt/camera/flask-camera-server/
+ExecStart=/opt/camera/flask-camera-server/start-server.sh
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

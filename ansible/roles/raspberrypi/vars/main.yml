@@ -1,0 +1,9 @@
+---
+api_port: 6443
+config_txt_changes:
+  # Enable the camera.
+  - option: start_x
+    value: '1'
+  # Ensure GPU has enough memory for camera.
+  - option: gpu_mem
+    value: '128'

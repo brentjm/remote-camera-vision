@@ -1,0 +1,38 @@
+---
+servers:
+  hosts:
+    server1
+  vars:
+    ansible_host: 192.168.56.100
+    ansible_port: 22
+    ansible_user: vagrant
+    ansible_ssh_private_key_file: '/home/brent/Documents/distributed-machine-vision/.vagrant/machines/server/virtualbox/private_key'
+
+
+#camera32:
+#  hosts:
+#    camera32-1:
+#      ansible_host: 192.168.56.103
+#    camera32-2:
+#      ansible_host: 192.168.56.102
+#camera64:
+#  hosts:
+#    camera64-4:
+#      ansible_host: 192.168.56.101
+#    camera64-2: 
+#      ansible_host: 192.168.56.104
+#
+#cameras:
+#  children:
+#    camera32
+#    camera64
+cameras:
+  hosts:
+    camera64-4
+
+  vars:
+    ansible_host: 192.168.56.101
+    ansible_port: 22
+    ansible_user: vagrant
+    ansible_ssh_private_key_file: '/home/brent/Documents/distributed-machine-vision/.vagrant/machines/server/virtualbox/private_key'
+

@@ -1,0 +1,4 @@
+---
+server_architecture: amd64
+user: vagrant
+server_file: ../cv_server
