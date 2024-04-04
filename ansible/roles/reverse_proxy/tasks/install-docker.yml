@@ -18,31 +18,10 @@
 
 - name: Add Docker GPG key
   ansible.builtin.get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg
+    url: https://download.docker.com/linux/{{ ansible_lsb.id|lower }}/gpg
     dest: /etc/apt/keyrings/docker.asc
     mode: '0644'
     force: true
-
-# Could not get this to work.
-#- name: Add Docker repo using key from URL.
-#  ansible.builtin.deb822_repository:
-#    name: docker
-#    types: [deb]
-#    uris: "https://download.docker.com/linux/ubuntu"
-#    components: [stable]
-#    #signed_by: /usr/share/keyrings/docker.gpg
-#    signed_by: "https://download.docker.com/linux/ubuntu/gpg"
-#    state: present
-#    enabled: true
-
-# Deprecated. see:
-# https://askubuntu.com/questions/1398344/apt-key-deprecation-warning-when-updating-system-key-is-stored-in-legacy-trust
-# https://www.jeffgeerling.com/blog/2022/aptkey-deprecated-debianubuntu-how-fix-ansible
-#- name: Add Docker GPG key
-#  ansible.builtin.apt_key:
-#    url: https://download.docker.com/linux/ubuntu/gpg
-#    keyring: /etc/apt/keyrings/docker.asc
-#    state: present
 
 # TODO why does the gather facts incorrectly report the architecture as x86_64?
 - name: Add Docker repository
@@ -50,7 +29,8 @@
     repo: >-
           deb [arch={{ server_architecture }}
           signed-by=/etc/apt/keyrings/docker.asc]
-          https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
+          https://download.docker.com/linux/{{ ansible_lsb.id|lower }} 
+          {{ ansible_lsb.codename|lower }} stable
     state: present
 
 - name: Install Docker and related packages
@@ -72,7 +52,7 @@
 
 - name: Add user to Docker group
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ docker_user }}"
     groups: docker
     append: true
   notify: Kill all user sessions

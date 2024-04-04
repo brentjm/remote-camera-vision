@@ -1,0 +1,15 @@
+---
+- name: Setup hub server
+  hosts: hubs
+  gather_facts: true
+  become: true
+  roles:
+#    - access_point # TODO need to confirm on clean pi
+    - reverse_proxy
+
+#- name: Raspberry Pi camera
+#  hosts: cameras
+#  gather_facts: true
+#  roles:
+#    - raspberrypi
+#    - camera

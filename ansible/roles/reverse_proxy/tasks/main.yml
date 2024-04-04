@@ -1,13 +1,9 @@
 ---
-- name: Include tasks in check-os.yml
-  ansible.builtin.include_tasks:
-    file: check-os.yml
-
-- name: Install tasks in install-docker.yml
+- name: Install Docker
   ansible.builtin.include_tasks:
     file: install-docker.yml
 
-- name: Install the application
+- name: Install Traefik
   ansible.builtin.include_tasks:
     file: install-app.yml
 

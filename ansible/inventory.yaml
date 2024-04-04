@@ -1,0 +1,21 @@
+---
+hubs:
+  hosts:
+    ape-1:
+      ansible_host: 10.131.73.216
+  vars:
+    ansible_port: 22
+    ansible_user: pi
+
+server:
+  hosts:
+    xeon: 
+      ansible_host: 10.131.72.83
+
+cameras:
+  hosts:
+    ape-205:
+      ansible_host: 192.168.56.103
+  vars:
+    ansible_port: 22
+    ansible_user: pi
