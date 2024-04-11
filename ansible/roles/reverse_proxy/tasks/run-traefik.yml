@@ -1,0 +1,38 @@
+---
+- name: Create directory for Traefik
+  ansible.builtin.file:
+    path: /opt/traefik/config
+    state: directory
+
+- name: Copy Compose file for Traefik
+  ansible.builtin.copy:
+    src: compose.yaml
+    dest: "/opt/traefik/compose.yaml"
+    remote_src: false
+    owner: '{{ docker_user }}'
+    group: '{{ docker_user }}'
+    mode: '0644'
+
+- name: Copy Traefik configuration
+  ansible.builtin.copy:
+    src: traefik.yaml
+    dest: /opt/traefik/traefik.yaml
+    remote_src: false
+    owner: '{{ docker_user }}'
+    group: '{{ docker_user }}'
+    mode: '0644'
+
+- name: Copy camera reverse-proxy configuration
+  ansible.builtin.copy:
+    src: camera.yaml
+    dest: /opt/traefik/config/camera.yaml
+    remote_src: false
+    owner: '{{ docker_user }}'
+    group: '{{ docker_user }}'
+    mode: '0644'
+
+- name: Start Docker compose file
+  community.docker.docker_compose:
+    project_src: /opt/traefik
+    state: present
+    build: yes

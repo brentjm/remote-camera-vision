@@ -1,11 +1,11 @@
 ---
-- name: Install Docker
-  ansible.builtin.include_tasks:
-    file: install-docker.yml
+#- name: Install Docker
+#  ansible.builtin.include_tasks:
+#    file: install-docker.yml
 
 - name: Install Traefik
   ansible.builtin.include_tasks:
-    file: install-app.yml
+    file: run-traefik.yml
 
 - name: Kill all user sessions
   ansible.builtin.meta: reset_connection

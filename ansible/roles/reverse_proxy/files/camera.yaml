@@ -1,0 +1,21 @@
+http:
+  routers:
+    camera1:
+      entrypoints: 
+        - web
+      rule: "Path(`/`)"
+      middlewares:
+        - "strip-prefix-web-page"
+      service: "web-page"
+
+  middlewares:
+    strip-prefix-web-page:
+      stripPrefixRegex:
+        regex:
+          - "/web-page"
+
+  services:
+    web-page:
+      loadBalancer:
+        servers:
+          - url: "http://nginx"

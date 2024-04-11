@@ -1,0 +1,25 @@
+api:
+  dashboard: true
+  insecure: true
+  debug: true
+
+entryPoints:
+  web:
+    address: ":80"
+  web-secure:
+    address: ":443"
+
+log:
+  filePath:  /var/log/traefik/traefik.log
+  level: debug
+
+providers:
+  file:
+    directory: /etc/traefik/config
+    watch: true
+
+  docker:
+    watch: true
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: reverse-proxy

@@ -9,6 +9,7 @@
     - curl
     - software-properties-common
     - gnupg2
+    - pip
 
 - name: Create directory for Docker's GPG key
   ansible.builtin.file:
@@ -65,3 +66,15 @@
   loop:
     - docker.service
     - containerd.service
+
+- name: Install Python SDK for Docker
+  ansible.builtin.pip:
+    name: docker
+    version: 6.1.3 # 6.1.3 is last version befor changing to docker compose
+    state: present
+
+# Ansible script doesn't work with updated docker compose
+- name: Install docker-compose
+  ansible.builtin.pip:
+    name: docker-compose
+    state: present
